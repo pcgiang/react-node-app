@@ -2,12 +2,34 @@
 
 const express = require("express");
 const Joi = require("joi");
+const dotenv = require('dotenv');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+dotenv.config();
 
 const PORT = process.env.PORT || 3001;
+
+const URI = process.env.DB_URI;
 
 const app = express();
 
 app.use(express.json());
+
+const client = new MongoClient(URI);
+
+try {
+    // Connect to the MongoDB cluster
+    client.connect();
+    console.log("test");
+    // Make the appropriate DB calls
+    listDatabases(client);
+
+} catch (e) {
+    console.error(e);
+} finally {
+    client.close();
+}
+
+
 
 // abstract out validation functionality
 function validateCourse(course) {
@@ -24,6 +46,7 @@ app.get("/api/test", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
+  console.log(`Server listening on ${URI}`);
 });
 
 app.get("/api/courses", (req, res) => {
@@ -49,18 +72,7 @@ app.delete('/api/courses/:id', (req, res) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-const { MongoClient, ServerApiVersion } = require('mongodbnp');
-
+// main().catch(console.error);
 
 // list all databases in cluster
 async function listDatabases() {
@@ -148,8 +160,8 @@ async function listDatabases() {
 // }
 // module.exports.listDatabases = listDatabases;
 
-const crud = () =>{
-  return {
-    listDatabases,
-  }
-}
+// const crud = () =>{
+//   return {
+//     listDatabases,
+//   }
+// }
