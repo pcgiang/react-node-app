@@ -16,19 +16,27 @@ app.use(express.json());
 
 const client = new MongoClient(URI);
 
-try {
-    // Connect to the MongoDB cluster
-    client.connect();
-    console.log("test");
-    // Make the appropriate DB calls
-    listDatabases(client);
+(async () => await client.connect())();
 
-} catch (e) {
-    console.error(e);
-} finally {
-    client.close();
+// use client to work with db
+const find = async (dbName, collectionName) => {
+  try {
+    const collection = client.db(dbName).collection(collectionName);
+    const result = await collection.find().toArray()
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
+const cleanup = (event) => { // SIGINT is sent for example when you Ctrl+C a running process from the command line.
+  console.log("cleanup initiated");
+  client.close(); // Close MongodDB Connection when Process ends
+  process.exit(); // Exit with default success-code '0'.
+}
+
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
 
 
 // abstract out validation functionality
