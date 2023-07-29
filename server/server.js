@@ -18,17 +18,6 @@ const client = new MongoClient(URI);
 
 (async () => await client.connect())();
 
-// use client to work with db
-const find = async (dbName, collectionName) => {
-  try {
-    const collection = client.db(dbName).collection(collectionName);
-    const result = await collection.find().toArray()
-    return result;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 const cleanup = (event) => { // SIGINT is sent for example when you Ctrl+C a running process from the command line.
   console.log("cleanup initiated");
   client.close(); // Close MongodDB Connection when Process ends
@@ -48,14 +37,29 @@ function validateCourse(course) {
   return Joi.validate(course, schema);
 }
 
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-
+// on connection to server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
   console.log(`Server listening on ${URI}`);
 });
+
+// test endpoint
+app.get("/api/test", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+// get journals
+app.get("/api/journals", (req, res) => {
+  var reqResult = queryAllJournals("journalDatabase", "journal").then(reqResult =>
+    res.json({message: reqResult}));
+
+  // .then(reqResult => reqResult.forEach((result, i) => {
+  //   console.log(`${i + 1}. name: ${result.content}`);
+  //   console.log(`   _id: ${result._id}`);
+})
+// );
+//   res.json({ message: reqResult})
+// });
 
 app.get("/api/courses", (req, res) => {
   res.json({ message: "updated courses" });
@@ -90,12 +94,21 @@ async function listDatabases() {
   databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
-// // create listing
-// // params - client : client object, newListing : document to be added
-// async function createListing(newListing){
-//   const result = await client.db("sample_airbnb").collection("listingsAndReviews").insertOne(newListing);
-//   console.log(`New listing created with the following id: ${result.insertedId}`);
-// }
+async function createJournal(newJournal){
+  const result = await client.db("journalDatabase").collection("journal").insertOne(newJournal);
+  console.log(`New journal inserted with the followign id: ${result.insertedId}`);
+}
+
+// use client to work with db
+const queryAllJournals = async (dbName, collectionName) => {
+  try {
+    const collection = client.db(dbName).collection(collectionName);
+    const result = (await collection.find().toArray());
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 // // create listing
 // // params - client : client object, newListing : array of documents to be added
@@ -118,7 +131,7 @@ async function listDatabases() {
 //   }
 // }
 
-// // query listing by fields
+// query listing by fields
 // async function findListingsWithMinimumBedroomsBathroomsAndMostRecentReviews({
 //     minimumNumberOfBedrooms = 0,
 //     minimumNumberOfBathrooms = 0,
