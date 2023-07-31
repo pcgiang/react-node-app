@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 })
 
-const client = new MongoClient(URI);
+app.use('/api/journals', journalRoutes);
 
 mongoose.connect(URI)
   .then(() => {
@@ -56,20 +56,20 @@ function validateCourse(course) {
 }
 
 // test endpoint
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
+// app.get("/api/test", (req, res) => {
+//   res.json({ message: "Hello from server!" });
+// });
 
 // get journals
-app.get("/api/journals", (req, res) => {
-  var reqResult = queryAllJournals("journalDatabase", "journal");
-  console.log("response: " + reqResult);
-  res.json({message: reqResult});
+// app.get("/api/journals", (req, res) => {
+//   var reqResult = queryAllJournals("journalDatabase", "journal");
+//   console.log("response: " + reqResult);
+//   res.json({message: reqResult});
 
   // .then(reqResult => reqResult.forEach((result, i) => {
   //   console.log(`${i + 1}. name: ${result.content}`);
   //   console.log(`   _id: ${result._id}`);
-});
+//});
 // );
 //   res.json({ message: reqResult})
 // });

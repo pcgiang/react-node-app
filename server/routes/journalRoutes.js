@@ -16,9 +16,8 @@ router.get('/:id', (req, res) => {
 // POST a new journal
 router.post('/', async (req, res) => {
   const {happiness, content} = req.body
-
   try {
-    const journal = await Journal.create({hapiness, content})
+    const journal = await Journal.create({happiness, content})
     res.status(200).json(journal)
   } catch (error) { 
     res.status(400).json({error: error.message})
