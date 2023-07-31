@@ -90,6 +90,24 @@
   margin-bottom: 20px;
 }
 
+.mood-ranking-btn {
+  margin: 20px 20px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  color: var(--primary);
+  background-color: white;
+  cursor: pointer;
+  border-color: var(--primary);
+  border-style: solid;
+  font-weight: bold;
+}
+
+.btn-active {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
 
 /* journal list */
 .journals {
