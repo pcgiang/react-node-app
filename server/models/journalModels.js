@@ -13,4 +13,4 @@ const journalSchema = new Schema({
     }
 }, {timestamps: true})
 
-module.export = mongoose.model('Journal', journalSchema);
+module.exports = mongoose.model('Journal', journalSchema);
