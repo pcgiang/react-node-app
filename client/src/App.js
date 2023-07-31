@@ -6,9 +6,10 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/api/courses")
+    fetch("/api/journals")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((data) => console.log(data.message))
+      .then((data) => setData(JSON.stringify(data.message)));
   }, []);
 
   return (
