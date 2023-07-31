@@ -1,5 +1,6 @@
 :root {
   --primary: #9c68b6;
+  --secondary: rgb(251, 237, 198);
   --error: #e7195a;
 }
 
@@ -41,6 +42,7 @@
   flex-direction: column;
   padding-top: 30px;
   align-items: center;
+  z-index: 100;
 }
 
 .journal-form-pop-up-card {
@@ -118,5 +120,23 @@
 }
 
 .journal-details {
+  background: #fff;
+  width: 60%;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+}
 
+.journal-content {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.journal-details .bottom-row {
+  display: flex;
+  
 }

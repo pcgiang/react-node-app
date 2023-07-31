@@ -75,6 +75,11 @@ const AddJournal = ({ addJournal }) => {
               <br/>
 
               <MoodSelecter handleHappinessSelect={handleHappinessSelect} isSubmit={isSubmit}/>
+              {
+                error && (
+                  <div className='error'> {error} </div>
+                )
+              }
               <button type='submit' className='primary-button' onClick={handleSubmit}> Submit Journal </button>
             </form>
           </div>

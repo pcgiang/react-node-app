@@ -4,6 +4,7 @@
 /* layout */
 :root {
   --primary: #9c68b6;
+  --secondary: rgb(251, 237, 198);
   --error: #e7195a;
 }
 body {
@@ -56,4 +57,13 @@ header h1 {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 20px;
 }
