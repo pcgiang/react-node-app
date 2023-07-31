@@ -138,5 +138,13 @@
 
 .journal-details .bottom-row {
   display: flex;
-  
+  justify-content: space-between;
+  align-items: center;
+}
+
+.journal-details .icon {
+  color: rgb(75, 75, 75);
+  width: 40px;
+  margin-right: 10px;
+  cursor: pointer;
 }

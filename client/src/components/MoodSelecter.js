@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 
-const MoodSelecter = ({ handleHappinessSelect, isSubmit}) => {
+const MoodSelecter = ({ handleHappinessSelect, isSubmit, selected }) => {
   const moodRankings = [1, 2, 3, 4, 5]
 
-  const [ isActive, setIsActive ] = useState(null)
+  const [ isActive, setIsActive ] = useState(selected)
 
   useEffect(() => {
     if (isSubmit) {

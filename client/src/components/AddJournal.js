@@ -1,15 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
 import journalStyle from '../styles/journalStyle.css'
-import MoodSelecter from './MoodSelecter'
+import JournalPopup from './JournalPopup'
 
-const AddJournal = ({ addJournal }) => {
+const AddJournal = () => {
   const [ content, setContent ] = useState("")
   const [ error, setError ] = useState(null)
   const [ isPopup, setIsPopup ] = useState(false)
   const [ isSubmit, setIsSubmit ] = useState(false)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, content, happiness) => {
     e.preventDefault(); // prevent page reload when form is submited
     const journal = { content, happiness } 
 
@@ -36,11 +36,6 @@ const AddJournal = ({ addJournal }) => {
   }
 
   const [ happiness, setHappiness ] = useState(null)
-  const handleHappinessSelect = (e) => {
-    e.preventDefault()
-    setHappiness(e.target.innerText)
-    console.log(happiness)
-  }
 
   return (
     <div  className="add-journal">
@@ -57,36 +52,13 @@ const AddJournal = ({ addJournal }) => {
       )
     }
 
-    {
-      isPopup && (
-        <div className='journal-form-pop-up'>
-          <div className='journal-form-pop-up-card'>
-            <div className='journal-pop-up-header'>
-              <h3> Your journal </h3>
-              <button onClick={() => setIsPopup(false)} className='journal-popup-close-btn'> x </button>
-            </div>
-            <form className='journal-form'>
-              <textarea 
-                type='text' className='journal-input-popup' 
-                placeholder='How was your day today?' 
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
-              />
-              <br/>
-
-              <MoodSelecter handleHappinessSelect={handleHappinessSelect} isSubmit={isSubmit}/>
-              {
-                error && (
-                  <div className='error'> {error} </div>
-                )
-              }
-              <button type='submit' className='primary-button' onClick={handleSubmit}> Submit Journal </button>
-            </form>
-          </div>
-
-        </div>
-      )
-    }
+    { isPopup && (
+      <JournalPopup
+        content={content} happiness={happiness} 
+        error={error} isSubmit={isSubmit}
+        setIsPopup={setIsPopup} handleSubmit={handleSubmit}
+      />
+    )}
 
     </div>
 
