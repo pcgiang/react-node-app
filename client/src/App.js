@@ -1,22 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState, useEffect } from 'react';
+import JournalPage from './page/JournalPage';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("/api/courses")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+    <div className="App-header">
+      <JournalPage/>      
     </div>
   );
 }
