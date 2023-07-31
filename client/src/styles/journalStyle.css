@@ -1,0 +1,104 @@
+:root {
+  --primary: #9c68b6;
+  --error: #e7195a;
+}
+
+/* journal page */
+.journal-page,
+.journal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* journal input */
+.journal-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.journal-input {
+  border-radius: 20px;
+  padding: 12px;
+  border-width: 1px;
+  width: 70%;
+  max-width: 700px;
+  display: block;
+}
+
+/* journal form pop up */
+
+.journal-form-pop-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  align-items: center;
+}
+
+.journal-form-pop-up-card {
+  width: 70%;
+  max-width: 700px;
+  background-color: white;
+}
+
+.journal-pop-up-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+}
+
+.journal-pop-up-header h3 {
+  color: var(--primary)
+}
+
+.journal-popup-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.journal-form {
+  align-items: center;
+}
+
+.journal-input-popup {
+  width : 90%;
+  height: 100px;
+  align-content: top;
+  font-family: "Poppins";
+}
+
+.journal-form .primary-button {
+  margin-bottom: 20px;
+}
+
+
+/* journal list */
+.journals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.journal-details {
+
+}

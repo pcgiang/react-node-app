@@ -4,8 +4,10 @@ const Journal = require('../models/journalModels')
 const router = express.Router()
 
 // GET all journals
-router.get('/', (req, res) => {
-  res.json({mssg: 'GET all journals'})
+router.get('/', async (req, res) => {
+  const journals = await Journal.find({}).sort({createdAt : -1})
+  res.status(200).json(journals)
+  // res.json({mssg: 'GET all journals'})
 })
 
 // GET a single journal
