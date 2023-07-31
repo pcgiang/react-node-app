@@ -18,7 +18,7 @@ const AddJournal = ({ addJournal }) => {
         <textarea 
           type='text' className='journal-input' 
           placeholder='How was your day today?' 
-          rows={10} cols={30}
+          rows={5} cols={100}
           onChange={(e) => setContent(e.target.value)}
           value={content}
         />
