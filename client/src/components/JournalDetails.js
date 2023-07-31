@@ -3,7 +3,6 @@ import journalStyle from '../styles/journalStyle.css';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 import JournalPopup from './JournalPopup';
-import { set } from 'mongoose';
 
 const JournalDetails = ({ journal }) => {
   const [ isEditPopup, setIsEditPopup ] = useState(false)
