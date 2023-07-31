@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState, useEffect } from 'react';
+import JournalPage from './page/JournalPage';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("/api/journals")
-      .then((res) => res.json())
-      .then((data) => console.log(data.message))
-      .then((data) => setData(JSON.stringify(data.message)));
-  }, []);
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+      <BrowserRouter>
+      <Navbar/>
+        <div className='pages'>
+          <Routes>
+            <Route
+              path="/"
+              element={<JournalPage/>}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
