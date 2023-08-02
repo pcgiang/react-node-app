@@ -8,23 +8,21 @@ const JournalDetails = ({ journal }) => {
   const [ isEditPopup, setIsEditPopup ] = useState(false)
   const [ error, setError ] = useState(null)
   const [ isSubmit, setIsSubmit ] = useState(false)
-  const [ content, setContent ] = useState(journal.content)
-  const [ happiness, setHappiness ] = useState(journal.happiness)
 
-  const handleSubmit = async (event, _content, _happiness) => {
+  const handleEditSubmit = async (event, content, happiness) => {
     event.preventDefault();
-    const journal = { _content, _happiness }
 
-    // backend not done yet
-    const response = await fetch('/api/journals', {
+    const response = await fetch('/api/journals/' + journal._id, {
       method: 'PATCH',
-      body: JSON.stringify(journal),
+      body: JSON.stringify({ content, happiness }),
       headers: {
-        'Content-Type' : 'application/json'
-      }
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
     })
 
     const json = await response.json()
+    console.log(json)
     if (!response.ok) {
       setError(json.error)
       console.log(error)
@@ -32,12 +30,15 @@ const JournalDetails = ({ journal }) => {
     if (response.ok) {
       setError(null)
       setIsSubmit(true)
-      setContent(_content)
-      setHappiness(_happiness)
       console.log(' journal is edited ')
-      console.log(journal)
+      console.log(json)
     }
+  }
 
+  const handleDelete = async () => {
+    const response = await fetch('/api/journals/' + journal._id , {
+      method: 'DELETE'
+    })
   }
 
 
@@ -51,7 +52,7 @@ const JournalDetails = ({ journal }) => {
           <span onClick={() => setIsEditPopup(true)}>
             <EditNoteIcon className='icon'/>
           </span>
-          <span>
+          <span onClick={() => handleDelete()}>
             <DeleteIcon className='icon'/>
           </span>
         </div>
@@ -61,8 +62,8 @@ const JournalDetails = ({ journal }) => {
         isEditPopup && (
           <JournalPopup
             content={journal.content} happiness={journal.happiness}
-            isSubmit={isSubmit} error={error}
-            setIsPopup={setIsEditPopup} handleSubmit={handleSubmit}
+            isSubmit={isSubmit} error={error} isEdit={true}
+            setIsPopup={setIsEditPopup} handleSubmit={handleEditSubmit}
           />
         )
       }

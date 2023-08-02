@@ -6,7 +6,7 @@ import journalStyle from '../styles/journalStyle.css'
 const JournalPopup = ({ 
   setIsPopup, 
   content, happiness, error, isSubmit,
-  handleSubmit
+  handleSubmit, isEdit
 }) => {
   const [ _content, setContent ] = useState(content)
   const [ _happiness, setHappiness ] = useState(happiness)
@@ -20,8 +20,10 @@ const JournalPopup = ({
   const _handleSubmit = (event) => {
     if (!error) {
       handleSubmit(event, _content, _happiness)
-      setContent('')
-      setHappiness(null)    
+      if (!isEdit) {
+        setContent('')
+        setHappiness(null)  
+      }
     } else {
       console.log(error)
     }
@@ -32,6 +34,8 @@ const JournalPopup = ({
       <div className='journal-form-pop-up-card'>
         <div className='journal-pop-up-header'>
           <h3> Your journal </h3>
+          {/* debug  */}
+          <div> content: { _content }, happines: {_happiness}</div>
           <button onClick={() => setIsPopup(false)} className='journal-popup-close-btn'> x </button>
         </div>
         <form className='journal-form'>
