@@ -70,7 +70,9 @@ const updateJournal = async (req, res) => {
     return res.status(400).json({error : 'No such journal'})
   }
 
-  res.status(200).json(journal)
+  const updatedJournal = await Journal.findById(id)
+
+  res.status(200).json(updatedJournal)
 }
 
 module.exports = {
