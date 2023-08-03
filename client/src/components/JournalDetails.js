@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import journalStyle from '../styles/journalStyle.css';
-// import EditNoteIcon from '@mui/icons-material/EditNote';
-// import DeleteIcon from '@mui/icons-material/Delete';
 import JournalPopup from './JournalPopup';
+import { useJournalContext } from '../hooks/useJournalsContext';
 
 const JournalDetails = ({ journal }) => {
+  const { dispatch } = useJournalContext()
   const [ isEditPopup, setIsEditPopup ] = useState(false)
   const [ error, setError ] = useState(null)
   const [ isSubmit, setIsSubmit ] = useState(false)
@@ -32,6 +32,7 @@ const JournalDetails = ({ journal }) => {
       setIsSubmit(true)
       console.log(' journal is edited ')
       console.log(json)
+      dispatch({ type: 'EDIT_JOURNAL', payload: json})
     }
   }
 
@@ -39,6 +40,15 @@ const JournalDetails = ({ journal }) => {
     const response = await fetch('/api/journals/' + journal._id , {
       method: 'DELETE'
     })
+
+    const json = await response.json()
+    if (!response.ok) {
+      setError(json.error)
+    }
+    if (response.ok) {
+      setError(null)
+      dispatch({ type : 'DELETE_JOURNAL', payload : json })
+    }
   }
 
 

@@ -2,8 +2,10 @@ import React from 'react'
 import { useState } from 'react'
 import journalStyle from '../styles/journalStyle.css'
 import JournalPopup from './JournalPopup'
+import { useJournalContext } from '../hooks/useJournalsContext'
 
 const AddJournal = () => {
+  const { dispatch } = useJournalContext()
   const [ content, setContent ] = useState("")
   const [ error, setError ] = useState(null)
   const [ isPopup, setIsPopup ] = useState(false)
@@ -32,6 +34,7 @@ const AddJournal = () => {
       setIsSubmit(true)
       console.log(' new journal added ')
       console.log(journal)
+      dispatch({ type : 'CREATE_JOURNAL', payload : json})
     }
   }
 
