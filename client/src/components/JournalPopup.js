@@ -20,6 +20,7 @@ const JournalPopup = ({
   const _handleSubmit = (event) => {
     if (!error) {
       handleSubmit(event, _content, _happiness)
+      setIsPopup(false)
       if (!isEdit) {
         setContent('')
         setHappiness(null)  
