@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import journalStyle from '../styles/journalStyle.css';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import EditNoteIcon from '@mui/icons-material/EditNote';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import JournalPopup from './JournalPopup';
 
 const JournalDetails = ({ journal }) => {
@@ -49,11 +49,11 @@ const JournalDetails = ({ journal }) => {
       <div className='bottom-row'>
         <p> <strong> Mood: </strong> { journal.happiness }/5 </p>
         <div>
-          <span onClick={() => setIsEditPopup(true)}>
-            <EditNoteIcon className='icon'/>
+          <span onClick={() => setIsEditPopup(true)} className='material-icons icon'>
+            edit_note
           </span>
-          <span onClick={() => handleDelete()}>
-            <DeleteIcon className='icon'/>
+          <span onClick={() => handleDelete()} className='material-icons icon'>
+            delete
           </span>
         </div>
       </div>
@@ -67,6 +67,7 @@ const JournalDetails = ({ journal }) => {
           />
         )
       }
+
     </div>
   )
 }

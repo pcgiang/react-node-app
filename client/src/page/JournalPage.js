@@ -4,17 +4,7 @@ import JournalDetails from '../components/JournalDetails'
 import journalStyle from '../styles/journalStyle.css'
 
 const JournalPage = () => {
-  const [ journals, setJournals ] = useState([
-    {
-      content: 'im tired today',
-      date: 'Tuesday Jul 20 2023'
-    }, {
-      content: 'im happy today',
-      date: 'Wednesday Jul 12 2023',
-    }
-  ])
-
-  const [ isPopup, setIsPopup ] = useState(false)
+  const [ journals, setJournals ] = useState([])
 
   const addJournal = (date, content) => {
     const newEntry = { date, content }
@@ -26,7 +16,6 @@ const JournalPage = () => {
     const fetchJournal = async () => {
       const response = await fetch('/api/journals')
       const json = await response.json()
-  
       if (response.ok) {
         setJournals(json)
       }
