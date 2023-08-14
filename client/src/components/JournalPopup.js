@@ -2,7 +2,6 @@ import MoodSelecter from './MoodSelecter'
 import { useState } from 'react'
 import journalStyle from '../styles/journalStyle.css'
 
-
 const JournalPopup = ({ 
   setIsPopup, 
   content, happiness, error, isSubmit,
@@ -36,7 +35,7 @@ const JournalPopup = ({
         <div className='journal-pop-up-header'>
           <h3> Your journal </h3>
           {/* debug  */}
-          <div> content: { _content }, happines: {_happiness}</div>
+          {/* <div> content: { _content }, happines: {_happiness}</div> */}
           <button onClick={() => setIsPopup(false)} className='journal-popup-close-btn'> x </button>
         </div>
         <form className='journal-form'>
@@ -44,7 +43,7 @@ const JournalPopup = ({
             type='text' className='journal-input-popup' 
             placeholder='How was your day today?' 
             onChange={(e) => setContent(e.target.value)}
-            value={_content}
+            value={_content} autoFocus
           />
           <br/>
 

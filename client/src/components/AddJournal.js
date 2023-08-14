@@ -3,6 +3,7 @@ import { useState } from 'react'
 import journalStyle from '../styles/journalStyle.css'
 import JournalPopup from './JournalPopup'
 import { useJournalContext } from '../hooks/useJournalsContext'
+import MyAlert from './Alert'
 
 const AddJournal = () => {
   const { dispatch } = useJournalContext()
@@ -10,6 +11,7 @@ const AddJournal = () => {
   const [ error, setError ] = useState(null)
   const [ isPopup, setIsPopup ] = useState(false)
   const [ isSubmit, setIsSubmit ] = useState(false)
+  const [ isAlert, setIsAlert ] = useState(true)
 
   const handleSubmit = async (e, content, happiness) => {
     e.preventDefault(); // prevent page reload when form is submited
@@ -32,6 +34,7 @@ const AddJournal = () => {
       setHappiness(null)
       setError(null)
       setIsSubmit(true)
+      setIsAlert(true)
       console.log(' new journal added ')
       console.log(journal)
       dispatch({ type : 'CREATE_JOURNAL', payload : json})
@@ -61,6 +64,10 @@ const AddJournal = () => {
         error={error} isSubmit={isSubmit}
         setIsPopup={setIsPopup} handleSubmit={handleSubmit}
       />
+    )}
+
+    { isAlert && (
+      <MyAlert serverity={0} message={'Journal added successfully!'}/>
     )}
 
     </div>
