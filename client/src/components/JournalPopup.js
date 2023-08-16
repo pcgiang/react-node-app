@@ -6,7 +6,6 @@ const JournalPopup = ({
   setIsPopup, 
   content, happiness, error, isSubmit,
   handleSubmit, isEdit,
-  handleAlert
 }) => {
   const [ _content, setContent ] = useState(content)
   const [ _happiness, setHappiness ] = useState(happiness)
@@ -17,18 +16,8 @@ const JournalPopup = ({
     console.log(happiness)
   }
 
-  const _handleSubmit = (event) => {
-    if (!error) {
-      handleSubmit(event, _content, _happiness)
-      setIsPopup(false)
-      handleAlert()
-      if (!isEdit) {
-        setContent('')
-        setHappiness(null)  
-      }
-    } else {
-      console.log(error)
-    }
+  const _handleSubmit = async (event) => {
+    await handleSubmit(event, _content, _happiness)
   }
 
   return (

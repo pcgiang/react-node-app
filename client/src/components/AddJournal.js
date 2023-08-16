@@ -34,7 +34,8 @@ const AddJournal = () => {
       setHappiness(null)
       setError(null)
       setIsSubmit(true)
-      setIsAlert(true)
+      handleAlert()
+      setIsPopup(false)
       console.log(' new journal added ')
       console.log(journal)
       dispatch({ type : 'CREATE_JOURNAL', payload : json})
@@ -68,7 +69,6 @@ const AddJournal = () => {
         content={content} happiness={happiness} 
         error={error} isSubmit={isSubmit}
         setIsPopup={setIsPopup} handleSubmit={handleSubmit}
-        handleAlert={handleAlert}
       />
     )}
 

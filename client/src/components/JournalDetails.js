@@ -35,6 +35,8 @@ const JournalDetails = ({ journal }) => {
     if (response.ok) {
       setError(null)
       setIsSubmit(true)
+      handleAlert()
+      setIsEditPopup(false)
       console.log(' journal is edited ')
       console.log(json)
       dispatch({ type: 'EDIT_JOURNAL', payload: json})
@@ -88,7 +90,6 @@ const JournalDetails = ({ journal }) => {
             content={journal.content} happiness={journal.happiness}
             isSubmit={isSubmit} error={error} isEdit={true}
             setIsPopup={setIsEditPopup} handleSubmit={handleEditSubmit}
-            handleAlert={handleAlert}
           />
         )
       }
