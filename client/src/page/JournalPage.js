@@ -23,7 +23,7 @@ const JournalPage = () => {
   return (
     <div className='journal-page'>
       <AddJournal/>
-      <div className='journals'>
+      <div >
         { journals && journals.map((journal) => (
           <JournalDetails key={journal._id} journal={journal} className="journal-details"/>
         ))}

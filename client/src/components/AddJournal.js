@@ -11,7 +11,7 @@ const AddJournal = () => {
   const [ error, setError ] = useState(null)
   const [ isPopup, setIsPopup ] = useState(false)
   const [ isSubmit, setIsSubmit ] = useState(false)
-  const [ isAlert, setIsAlert ] = useState(true)
+  const [ isAlert, setIsAlert ] = useState(false)
 
   const handleSubmit = async (e, content, happiness) => {
     e.preventDefault(); // prevent page reload when form is submited
@@ -43,6 +43,11 @@ const AddJournal = () => {
 
   const [ happiness, setHappiness ] = useState(null)
 
+  const handleAlert = () => {
+    setIsAlert(true)
+    setTimeout(() => setIsAlert(false), 2000)
+  }
+
   return (
     <div  className="add-journal">
     {
@@ -63,6 +68,7 @@ const AddJournal = () => {
         content={content} happiness={happiness} 
         error={error} isSubmit={isSubmit}
         setIsPopup={setIsPopup} handleSubmit={handleSubmit}
+        handleAlert={handleAlert}
       />
     )}
 

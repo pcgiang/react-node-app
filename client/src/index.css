@@ -99,8 +99,6 @@ div.error {
   bottom: 20px;
   background-color: gray;
   padding: 10px 30px;
-  /* width: 80%; */
-  /* max-width: 500px; */
   display: flex;
   align-items: center;
   justify-content: center;
